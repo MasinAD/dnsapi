@@ -1,0 +1,45 @@
+---
+config:
+  Provider:
+    Core Networks:
+      url: "https://beta.api.core-networks.de"
+      auth_header: "Authorization: Bearer %s"
+      endpoints:
+        "auth":
+          path: "/auth/token"
+          method: "POST"
+          parameters:
+            login: string
+            password: string
+        "getDnsZones":
+          path: "/dnszones/"
+          method: "GET"
+        "getDnsZone":
+          path: "/dnszones/%s"
+          method: "GET"
+        "getDnsRecordlist":
+          path: "/dnszones/%s/records/"
+          method: "GET"
+        "setDnsRecord":
+          path: "/dnszones/%s/records/"
+          method: "POST"
+          parameters:
+            name: string
+            type: string
+            data: string
+          optional:
+            ttl: int
+        "deleteDnsRecords":
+          path: "/dnszones/%s/records/delete"
+          method: "POST"
+          optional:
+            name: string
+            ttl: int
+            type: string
+            data: string
+        "commit":
+          path: "/commit/"
+          method: "POST"
+      config:
+        needsAuth: true
+        auth: plain
